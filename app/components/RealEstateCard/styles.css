@@ -1,0 +1,20 @@
+.CardContainer {
+  width: 100%;
+  max-width: 600px;
+  min-width: 480px;
+  height: 320px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.CardContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}

@@ -1,12 +1,8 @@
-"use client";
-
 import Head from "next/head";
 import Image from "next/image";
-import { Header } from "./ui/Header";
-import { TagBar } from "./ui/TagBar.tsx";
-import { Banner } from "./ui/Banner";
-import { Content } from "next/font/google";
-import { MainContent } from "./ui/MainContent";
+import { Header } from "../../ui/Header";
+import { TagBar } from "../../ui/TagBar.tsx";
+import { Banner } from "@/app/ui/Banner";
 
 const Home = () => {
   return (
@@ -19,8 +15,6 @@ const Home = () => {
     >
       <Header />
       <TagBar />
-      <Banner />
-      <MainContent />
     </main>
   );
 };
