@@ -7,8 +7,23 @@ import { TagBar } from "./ui/TagBar.tsx";
 import { Banner } from "./ui/Banner";
 import { Content } from "next/font/google";
 import { MainContent } from "./ui/MainContent";
+import { useEffect, useState } from "react";
+import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "./lib/firebase/firebase";
 
 const Home = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  // const toast = useToast();
+  const auth = getAuth(app);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
   return (
     <main
       // className="flex min-h-screen flex-col items-center justify-between p-24"
@@ -17,9 +32,9 @@ const Home = () => {
         backgroundColor: "#ffffff",
       }}
     >
-      <Header />
+      <Header user={user} />
       <TagBar />
-      <Banner />
+      {/* <Banner /> */}
       <MainContent />
     </main>
   );
