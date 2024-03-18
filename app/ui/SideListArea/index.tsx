@@ -15,10 +15,13 @@ export const SideListArea: FC<SideListAreaProps> = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        // width: "726px",
         gap: "32px",
-        padding: "120px 64px",
+        padding: "64px",
+        overflowY: "auto",
+        overflowX: "hidden",
+        maxHeight: "calc(100vh - 200px)",
+        boxSizing: "border-box",
+        width: "100%",
       }}
     >
       {children}

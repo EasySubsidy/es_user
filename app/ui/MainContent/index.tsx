@@ -15,7 +15,18 @@ import { SelectedCard } from "../SelectedCard";
 const estateData: EstateCardType[] = EstateDatum;
 
 export const MainContent: FC = () => {
-  const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
+  const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
+
+  const handleCardClick = (index: number) => {
+    // 選択中の場合は選択解除
+    if (selectedCardList.includes(index)) {
+      setSelectedCardList(selectedCardList.filter((i) => i !== index));
+      return;
+    } else {
+      setSelectedCardList([...selectedCardList, index]);
+    }
+  };
+
   return (
     <div
       style={{
@@ -27,6 +38,7 @@ export const MainContent: FC = () => {
         alignItems: "flex-start",
         justifyContent: "center",
         gap: "48px",
+        padding: "64px",
       }}
     >
       <div
@@ -52,11 +64,14 @@ export const MainContent: FC = () => {
                   title: data.title,
                   address: data.address,
                   price: data.price,
+                  subsidy_amount: data.subsidy_amount,
                   nearest_station: data.nearestStationInfo.title,
                   image_url: data.image_url,
                   description: data.description,
                 }}
-                index={index + 1}
+                displayIndex={index + 1}
+                onSelect={() => handleCardClick(index)}
+                isSelected={selectedCardList.includes(index)}
               />
             );
           })}
@@ -64,13 +79,13 @@ export const MainContent: FC = () => {
         <div
           style={{
             width: "100%",
-            height: "auto",
+            height: "calc(100vh - 240px)",
             // backgroundColor: "#ECECEC",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "120px 64px",
+            // padding: "120px 64px",
             gap: "32px",
           }}
         >
@@ -81,10 +96,10 @@ export const MainContent: FC = () => {
               lng: 139.6952692,
             }}
           />
-          <SelectedCard
-            detailEstateData={detailDataList[selectedCardNumber]}
-            index={selectedCardNumber + 1}
-          />
+          {/* <SelectedCard
+            detailEstateData={detailDataList[selectedCardList]}
+            index={selectedCardList + 1}
+          /> */}
           {/* <GoogleMapMini
             zoom={15}
             defaultInfo={{
