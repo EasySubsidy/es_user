@@ -65,9 +65,11 @@ export const MainContent: FC = () => {
                   address: data.address,
                   price: data.price,
                   subsidy_amount: data.subsidy_amount,
-                  nearest_station: data.nearestStationInfo.title,
                   image_url: data.image_url,
                   description: data.description,
+                  zoom: data.zoom,
+                  defaultInfo: data.defaultInfo,
+                  nearestStationInfo: data.nearestStationInfo,
                 }}
                 displayIndex={index + 1}
                 onSelect={() => handleCardClick(index)}

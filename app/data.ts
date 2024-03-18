@@ -112,7 +112,7 @@ export type detailDataType = {
   };
   nearestStationInfo: {
     title: string;
-    address: string; // これはどっちでもいい
+    address: string;
     nearestStationPosition: {
       lat: number;
       lng: number;

@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { EstateCardType, EstateDatum } from "../../data";
+import { EstateCardType, EstateDatum, detailDataType } from "../../data";
 import { TopicLeading } from "./parts/topicLeadingIcon";
 import { FC } from "react";
 
 import "./styles.css";
-const estateDataList: EstateCardType[] = EstateDatum;
+// const estateDataList: detailDataType[] = EstateDatum;
 
 type PropsType = {
-  estateData: EstateCardType;
+  estateData: detailDataType;
   isSelected: boolean;
   displayIndex: number;
   onSelect: () => void;
@@ -19,6 +19,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
   return (
     <div
       className={`CardWrapper ${isSelected ? "selected" : ""}`}
+      onClick={() => onSelect()}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -31,7 +32,6 @@ export const RealEstateCard: FC<PropsType> = (props) => {
       <div
         // className="flex flex-col items-center justify-center w-[300px] h-[400px] bg-[#ECECEC]"
         className="CardContainer"
-        onClick={() => onSelect()}
       >
         <div
           className="topArea"
@@ -149,6 +149,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
+                gap: "8px",
               }}
             >
               <div
@@ -160,10 +161,10 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   gap: "8px",
                 }}
               >
-                <TopicLeading title="家賃" />
+                <TopicLeading title="家賃" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 12,
+                    fontSize: 16,
                     // fontWeight: 700,
                     color: "#000",
                     textAlign: "center",
@@ -181,10 +182,10 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   gap: "8px",
                 }}
               >
-                <TopicLeading title="補助金総額" />
+                <TopicLeading title="補助金総額" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 12,
+                    fontSize: 16,
                     // fontWeight: 700,
                     color: "#000",
                     textAlign: "center",
@@ -202,10 +203,10 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   gap: "8px",
                 }}
               >
-                <TopicLeading title="住所" />
+                <TopicLeading title="住所" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 12,
+                    fontSize: 14,
                     // fontWeight: 700,
                     color: "#000",
                     textAlign: "center",
@@ -223,16 +224,16 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   gap: "8px",
                 }}
               >
-                <TopicLeading title="最寄駅" />
+                <TopicLeading title="最寄駅" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 12,
+                    fontSize: 14,
                     // fontWeight: 700,
                     color: "#000",
                     textAlign: "center",
                   }}
                 >
-                  {estateData.nearest_station}
+                  {estateData.nearestStationInfo.title}
                 </p>
               </div>
             </div>
@@ -271,7 +272,51 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             color: "#000",
           }}
         >
-          <p>モーダルの内容</p>
+          <div
+            className="detail-subsidy"
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "16px",
+            }}
+          >
+            内訳の内容を書きたい。
+          </div>
+          <div
+            className="descriptions"
+            style={{
+              width: "100%",
+              height: "auto",
+              // backgroundColor: "#ECECEC",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "16px",
+            }}
+          >
+            {estateData.description.map((text: string, index: number) => {
+              return (
+                <p
+                  key={index}
+                  style={{
+                    fontSize: 14,
+                    // fontWeight: 700,
+                    color: "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  {text}
+                </p>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
