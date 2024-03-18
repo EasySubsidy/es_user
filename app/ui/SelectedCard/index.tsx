@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { EstateCardType, EstateDatum, detailDataType } from "../../data";
+import { EstateCardType, detailDataType } from "../../data";
 import { TopicLeading } from "./parts/topicLeading";
 import { FC } from "react";
 
@@ -7,7 +7,8 @@ import "./styles.css";
 import SwiperArea from "@/app/components/SwiperArea";
 import { SwiperSlide } from "swiper/react";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
-const estateDataList: EstateCardType[] = EstateDatum;
+// 要修正：グローバル変数から持ってくるようにする
+const estateDataList: EstateCardType[] = [];
 
 type PropsType = {
   detailEstateData: detailDataType;

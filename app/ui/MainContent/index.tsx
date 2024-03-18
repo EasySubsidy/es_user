@@ -1,8 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { SideListArea } from "../SideListArea";
 import {
   EstateCardType,
-  EstateDatum,
   detailData,
   detailDataList,
   detailDataType,
@@ -11,11 +10,24 @@ import { RealEstateCard } from "@/app/components/RealEstateCard";
 import GoogleMap from "../GoogleMap/GoogleMap";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { SelectedCard } from "../SelectedCard";
-
-const estateData: EstateCardType[] = EstateDatum;
+import { getAllTenants, Tenant } from "../../api/SearchTenant";
 
 export const MainContent: FC = () => {
+  //ここをグローバルにして、画面が出たタイミングでデータを取得するようにしたい
+  const [tenants, setTenants] = useState<Tenant[]>([]);
   const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
+  useEffect(() => {
+    const fetchTenants = async () => {
+      try {
+        const fetchedTenants = await getAllTenants();
+        setTenants(fetchedTenants);
+      } catch (error) {
+        console.error("Failed to fetch tenants:", error);
+      }
+    };
+
+    fetchTenants();
+  }, []);
   return (
     <div
       style={{
@@ -43,18 +55,18 @@ export const MainContent: FC = () => {
         }}
       >
         <SideListArea>
-          {detailDataList.map((data: detailDataType, index: number) => {
+          {tenants.map((tenant, index) => {
             return (
               <RealEstateCard
                 key={index}
                 estateData={{
-                  id: data.id,
-                  title: data.title,
-                  address: data.address,
-                  price: data.price,
-                  nearest_station: data.nearestStationInfo.title,
-                  image_url: data.image_url,
-                  description: data.description,
+                  id: tenant.id,
+                  title: tenant.title,
+                  address: tenant.address,
+                  price: tenant.rent.toString(),
+                  nearest_station: tenant.name_station,
+                  image_url: tenant.images,
+                  description: tenant.description,
                 }}
                 index={index + 1}
               />
