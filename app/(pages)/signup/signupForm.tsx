@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useAuth } from "@/app/context";
 import Link from "next/link";
 import { registerUser } from "@/app/api/registerUser";
+import { paths } from "@/app/consts/paths";
 
 const schema = z.object({
   email: z.string().email({ message: "無効なメールアドレスです" }),
@@ -43,7 +44,7 @@ export const SignUpForm = () => {
         position: "top",
       });
       registerUser(userCredential.user.uid, data);
-      router.push("/home");
+      router.push(paths.home);
     } catch (error) {
       toast({
         title: "エラーが発生しました。",
@@ -106,7 +107,7 @@ export const SignUpForm = () => {
         <div className="flex mt-4 text-center gap-1 justify-center">
           <p>すでにアカウントをお持ちですか？</p>
           <Link
-            href={"/login"} // ログインページのパスに変更してください
+            href={paths.login} // ログインページのパスに変更してください
             className="text-blue-500 hover:text-blue-700"
           >
             ログイン
