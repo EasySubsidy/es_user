@@ -1,3 +1,4 @@
+import { Collection } from "../entity";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -22,7 +23,7 @@ interface Tenant {
 
 const getAllTenants = async (): Promise<Tenant[]> => {
   try {
-    const tenantCollectionRef = collection(db, "tenant");
+    const tenantCollectionRef = collection(db, Collection.TENANT);
     const snapshot = await getDocs(tenantCollectionRef);
     console.log("snapshots: ", snapshot.docs);
     const tenants: Tenant[] = snapshot.docs.map((doc) => ({
