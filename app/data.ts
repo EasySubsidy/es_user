@@ -6,85 +6,85 @@ export type EstateCardType = {
   //最寄えき
   nearest_station: string;
   image_url: string[];
-  description: string[];
+  description: string;
 };
 
-export const EstateDatum: EstateCardType[] = [
-  {
-    id: "1",
-    title: "ミダス渋谷ラウンジ",
-    address: "東京都新宿区西新宿1-1-1",
-    price: "¥100,000",
-    nearest_station: "新宿駅",
-    image_url: ["/model_img.png"],
-    description: [
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-    ],
-  },
-  {
-    id: "2",
-    title: "ミダス渋谷ラウンジ",
-    address: "東京都新宿区西新宿1-1-1",
-    price: "¥100,000",
-    nearest_station: "新宿駅",
-    image_url: ["/model_img.png"],
+// export const EstateDatum: EstateCardType[] = [
+//   {
+//     id: "1",
+//     title: "ミダス渋谷ラウンジ",
+//     address: "東京都新宿区西新宿1-1-1",
+//     price: "¥100,000",
+//     nearest_station: "新宿駅",
+//     image_url: ["/model_img.png"],
+//     description: [
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//     ],
+//   },
+//   {
+//     id: "2",
+//     title: "ミダス渋谷ラウンジ",
+//     address: "東京都新宿区西新宿1-1-1",
+//     price: "¥100,000",
+//     nearest_station: "新宿駅",
+//     image_url: ["/model_img.png"],
 
-    description: [
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-    ],
-  },
-  {
-    id: "3",
-    title: "ミダス渋谷ラウンジ",
-    address: "東京都新宿区西新宿1-1-1",
-    price: "¥100,000",
-    nearest_station: "新宿駅",
-    image_url: ["/model_img.png"],
+//     description: [
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//     ],
+//   },
+//   {
+//     id: "3",
+//     title: "ミダス渋谷ラウンジ",
+//     address: "東京都新宿区西新宿1-1-1",
+//     price: "¥100,000",
+//     nearest_station: "新宿駅",
+//     image_url: ["/model_img.png"],
 
-    description: [
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-    ],
-  },
-  {
-    id: "4",
-    title: "ミダス渋谷ラウンジ",
-    address: "東京都新宿区西新宿1-1-1",
-    price: "¥100,000",
-    nearest_station: "新宿駅",
-    image_url: ["/model_img.png"],
+//     description: [
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//     ],
+//   },
+//   {
+//     id: "4",
+//     title: "ミダス渋谷ラウンジ",
+//     address: "東京都新宿区西新宿1-1-1",
+//     price: "¥100,000",
+//     nearest_station: "新宿駅",
+//     image_url: ["/model_img.png"],
 
-    description: [
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-    ],
-  },
-  {
-    id: "5",
-    title: "ミダス渋谷ラウンジ",
-    address: "東京都新宿区西新宿1-1-1",
-    price: "¥100,000",
-    nearest_station: "新宿駅",
-    image_url: ["/model_img.png"],
+//     description: [
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//     ],
+//   },
+//   {
+//     id: "5",
+//     title: "ミダス渋谷ラウンジ",
+//     address: "東京都新宿区西新宿1-1-1",
+//     price: "¥100,000",
+//     nearest_station: "新宿駅",
+//     image_url: ["/model_img.png"],
 
-    description: [
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-      "新宿駅徒歩5分",
-    ],
-  },
-];
+//     description: [
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//       "新宿駅徒歩5分",
+//     ],
+//   },
+// ];
 
 export type detailDataType = {
   id: string;

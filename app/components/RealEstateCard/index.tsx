@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { EstateCardType, EstateDatum } from "../../data";
+import { EstateCardType } from "../../data";
 import { TopicLeading } from "./parts/topicLeading";
 import { FC } from "react";
 
 import "./styles.css";
-const estateDataList: EstateCardType[] = EstateDatum;
+// const estateDataList: EstateCardType[] = EstateDatum;
 
 type PropsType = {
   estateData: EstateCardType;
@@ -228,18 +228,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
           // justifyContent: "center",
         }}
       >
-        {estateData.description.map((desc, index) => (
-          <p
-            key={index}
-            style={{
-              fontSize: "12px",
-              color: "#000",
-              textAlign: "center",
-            }}
-          >
-            {desc}
-          </p>
-        ))}
+        {estateData.description}
       </div>
     </div>
   );
