@@ -1,18 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { SideListArea } from "../SideListArea";
-import {
-  EstateCardType,
-  EstateDatum,
-  detailData,
-  detailDataList,
-  detailDataType,
-} from "../../data";
+// import {
+//   EstateCardType,
+//   detailData,
+//   detailDataList,
+//   detailDataType,
+// } from "../../data";
 import { RealEstateCard } from "@/app/components/RealEstateCard";
 import GoogleMap from "../GoogleMap/GoogleMap";
-import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { SelectedCard } from "../SelectedCard";
-
-const estateData: EstateCardType[] = EstateDatum;
+import { useTenants } from "@/app/context";
 
 export const MainContent: FC = () => {
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
@@ -26,6 +23,9 @@ export const MainContent: FC = () => {
       setSelectedCardList([...selectedCardList, index]);
     }
   };
+
+  // const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
+  const { tenants, tenantsLoading } = useTenants();
 
   return (
     <div
@@ -54,30 +54,33 @@ export const MainContent: FC = () => {
           gap: "48px",
         }}
       >
-        <SideListArea>
-          {detailDataList.map((data: detailDataType, index: number) => {
-            return (
-              <RealEstateCard
-                key={index}
-                estateData={{
-                  id: data.id,
-                  title: data.title,
-                  address: data.address,
-                  price: data.price,
-                  subsidy_amount: data.subsidy_amount,
-                  image_url: data.image_url,
-                  description: data.description,
-                  zoom: data.zoom,
-                  defaultInfo: data.defaultInfo,
-                  nearestStationInfo: data.nearestStationInfo,
-                }}
-                displayIndex={index + 1}
-                onSelect={() => handleCardClick(index)}
-                isSelected={selectedCardList.includes(index)}
-              />
-            );
-          })}
-        </SideListArea>
+        {tenantsLoading ? (
+          <p>Loading...</p>
+        ) : tenants.length === 0 ? (
+          <p>No tenants</p>
+        ) : (
+          <SideListArea>
+            {tenants.map((tenant, index) => {
+              return (
+                <RealEstateCard
+                  key={index}
+                  estateData={{
+                    id: tenant.id,
+                    title: tenant.title,
+                    address: tenant.address,
+                    price: tenant.rent.toString(),
+                    nearest_station: tenant.name_station,
+                    image_url: tenant.images,
+                    description: tenant.description,
+                  }}
+                  index={index + 1}
+                />
+              );
+            })}
+          </SideListArea>
+        )}
+
+        {/* >>>>>>> firebase_auth */}
         <div
           style={{
             width: "100%",

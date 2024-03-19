@@ -1,13 +1,17 @@
 import Image from "next/image";
-import { EstateCardType, EstateDatum, detailDataType } from "../../data";
+// <<<<<<< HEAD
+// import { EstateCardType, EstateDatum, detailDataType } from "../../data";
 import { TopicLeading } from "./parts/topicLeadingIcon";
 import { FC } from "react";
 
 import "./styles.css";
-// const estateDataList: detailDataType[] = EstateDatum;
+
+import "./styles.css";
+import React from "react";
+import { Tenant } from "../../api/SearchTenant";
 
 type PropsType = {
-  estateData: detailDataType;
+  estateData: Tenant;
   isSelected: boolean;
   displayIndex: number;
   onSelect: () => void;
@@ -64,7 +68,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             }}
           >
             <Image
-              src={estateData.image_url[0]}
+              src={estateData.images[0]}
               alt="image"
               width={140}
               height={80}
@@ -170,7 +174,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     textAlign: "center",
                   }}
                 >
-                  {estateData.price}
+                  {estateData.rent}
                 </p>
               </div>
               <div
@@ -191,7 +195,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     textAlign: "center",
                   }}
                 >
-                  {estateData.subsidy_amount}
+                  {estateData.rent}
                 </p>
               </div>
               <div
@@ -233,7 +237,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     textAlign: "center",
                   }}
                 >
-                  {estateData.nearestStationInfo.title}
+                  {estateData.name_station}
                 </p>
               </div>
             </div>
@@ -301,7 +305,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               padding: "16px",
             }}
           >
-            {estateData.description.map((text: string, index: number) => {
+            {/* {estateData.description.map((text: string, index: number) => {
               return (
                 <p
                   key={index}
@@ -315,7 +319,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   {text}
                 </p>
               );
-            })}
+            })} */}
           </div>
         </div>
       )}
