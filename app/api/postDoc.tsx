@@ -1,5 +1,5 @@
 import { doc, setDoc } from "@firebase/firestore";
-import { db } from "@/app/firebaseConfig";
+import { db } from "@/app/firebase";
 import { Collection } from "@/app/entity";
 
 // Firebase Realtime Databaseにドキュメントを保存する

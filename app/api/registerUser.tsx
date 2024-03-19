@@ -9,7 +9,7 @@ export const registerUser = async (uid: string, data: SignupFormData) => {
       email: data.email,
     };
 
-    PostDoc<AppUser>(Collection.REALTOR, uid, appUser);
+    PostDoc<AppUser>(Collection.USER, uid, appUser);
   } catch (error) {
     console.error("upload file was failed", error);
     return;
