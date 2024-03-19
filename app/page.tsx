@@ -1,14 +1,12 @@
 "use client";
 
 import { Header } from "./ui/Header";
-import { TagBar } from "./ui/TagBar.tsx";
-import { Banner } from "./ui/Banner";
-import { MainContent } from "./ui/MainContent";
-import { TenantsProvider } from "@/app/context";
+import { AuthProvider } from "@/app/context";
+import { ReactNode } from "react";
 
-const Home = () => {
+const Home = ({ children }: { children: ReactNode }) => {
   return (
-    <TenantsProvider>
+    <AuthProvider>
       <main
         // className="flex min-h-screen flex-col items-center justify-between p-24"
         className="flex min-h-screen flex-col items-center"
@@ -17,11 +15,12 @@ const Home = () => {
         }}
       >
         <Header />
-        <TagBar />
-        <Banner />
-        <MainContent />
+        {/*  <TagBar />
+          <Banner />
+          <MainContent /> */}
+        {children}
       </main>
-    </TenantsProvider>
+    </AuthProvider>
   );
 };
 

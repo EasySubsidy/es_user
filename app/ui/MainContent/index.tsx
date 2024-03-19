@@ -13,7 +13,7 @@ import { useTenants } from "@/app/context";
 
 export const MainContent: FC = () => {
   const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
-  const { tenants, loading } = useTenants();
+  const { tenants, tenantsLoading } = useTenants();
 
   return (
     <div
@@ -41,7 +41,7 @@ export const MainContent: FC = () => {
           gap: "48px",
         }}
       >
-        {loading ? (
+        {tenantsLoading ? (
           <p>Loading...</p>
         ) : tenants.length === 0 ? (
           <p>No tenants</p>

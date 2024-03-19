@@ -1,4 +1,4 @@
-import { Tenant } from "@/app/api/SearchTenant";
+import { Tenant } from "@/app/api/searchTenant";
 import {
   ReactNode,
   createContext,
@@ -6,23 +6,23 @@ import {
   useState,
   useContext,
 } from "react";
-import { getAllTenants } from "@/app/api/SearchTenant";
+import { getAllTenants } from "@/app/api/searchTenant";
 
 type TenantContextType = {
   tenants: Tenant[];
-  loading: boolean;
+  tenantsLoading: boolean;
 };
 
 const TenantsContext = createContext<TenantContextType>({
   tenants: [],
-  loading: true,
+  tenantsLoading: true,
 });
 
 export const useTenants = () => useContext(TenantsContext);
 
 export const TenantsProvider = ({ children }: { children: ReactNode }) => {
   const [tenants, setTenants] = useState<Tenant[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [tenantsLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTenants = async () => {
@@ -40,7 +40,7 @@ export const TenantsProvider = ({ children }: { children: ReactNode }) => {
     fetchTenants();
   }, []);
 
-  const value = { tenants, loading };
+  const value = { tenants, tenantsLoading };
 
   return (
     <TenantsContext.Provider value={value}>{children}</TenantsContext.Provider>
