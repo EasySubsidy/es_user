@@ -6,10 +6,11 @@ import { SideListArea } from "../SideListArea";
 //   detailDataList,
 //   detailDataType,
 // } from "../../data";
-import { RealEstateCard } from "@/app/components/RealEstateCard";
+
 import GoogleMap from "../GoogleMap/GoogleMap";
 import { SelectedCard } from "../SelectedCard";
-import { useTenants } from "@/app/context";
+import { useTenants } from "../../context/tenantContext";
+import { RealEstateCard } from "../../components/RealEstateCard";
 
 export const MainContent: FC = () => {
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
@@ -66,14 +67,25 @@ export const MainContent: FC = () => {
                   key={index}
                   estateData={{
                     id: tenant.id,
+                    prefecture_id: tenant.prefecture_id,
+                    city_id: tenant.city_id,
+                    subsidy_id: tenant.subsidy_id,
                     title: tenant.title,
-                    address: tenant.address,
-                    price: tenant.rent.toString(),
-                    nearest_station: tenant.name_station,
-                    image_url: tenant.images,
+                    images: tenant.images,
+                    area: tenant.area,
                     description: tenant.description,
+                    rent: tenant.rent,
+                    address: tenant.address,
+                    latitude: tenant.latitude,
+                    longitude: tenant.longitude,
+                    name_station: tenant.name_station,
+                    address_station: tenant.address_station,
+                    latitude_station: tenant.latitude_station,
+                    longitude_station: tenant.longitude_station,
                   }}
-                  index={index + 1}
+                  isSelected={selectedCardList.includes(index)}
+                  displayIndex={index + 1}
+                  onSelect={() => handleCardClick}
                 />
               );
             })}

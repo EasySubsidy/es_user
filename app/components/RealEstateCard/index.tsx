@@ -8,7 +8,7 @@ import "./styles.css";
 
 import "./styles.css";
 import React from "react";
-import { Tenant } from "../../api/SearchTenant";
+import { Tenant } from "../../api/searchTenant";
 
 type PropsType = {
   estateData: Tenant;
