@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "noImplicitAny": false,
     "plugins": [
       {
         "name": "next"
@@ -26,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/_app.js"
+    "app/firebaseConfig.js"
   ],
   "exclude": ["node_modules"]
 }
