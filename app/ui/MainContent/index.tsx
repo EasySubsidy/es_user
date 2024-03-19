@@ -10,24 +10,12 @@ import { RealEstateCard } from "@/app/components/RealEstateCard";
 import GoogleMap from "../GoogleMap/GoogleMap";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { SelectedCard } from "../SelectedCard";
-import { getAllTenants, Tenant } from "../../api/SearchTenant";
+import { useTenants } from "@/app/context";
 
 export const MainContent: FC = () => {
-  //ここをグローバルにして、画面が出たタイミングでデータを取得するようにしたい
-  const [tenants, setTenants] = useState<Tenant[]>([]);
   const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
-  useEffect(() => {
-    const fetchTenants = async () => {
-      try {
-        const fetchedTenants = await getAllTenants();
-        setTenants(fetchedTenants);
-      } catch (error) {
-        console.error("Failed to fetch tenants:", error);
-      }
-    };
+  const { tenants, loading } = useTenants();
 
-    fetchTenants();
-  }, []);
   return (
     <div
       style={{
@@ -54,25 +42,32 @@ export const MainContent: FC = () => {
           gap: "48px",
         }}
       >
-        <SideListArea>
-          {tenants.map((tenant, index) => {
-            return (
-              <RealEstateCard
-                key={index}
-                estateData={{
-                  id: tenant.id,
-                  title: tenant.title,
-                  address: tenant.address,
-                  price: tenant.rent.toString(),
-                  nearest_station: tenant.name_station,
-                  image_url: tenant.images,
-                  description: tenant.description,
-                }}
-                index={index + 1}
-              />
-            );
-          })}
-        </SideListArea>
+        {loading ? (
+          <p>Loading...</p>
+        ) : tenants.length === 0 ? (
+          <p>No tenants</p>
+        ) : (
+          <SideListArea>
+            {tenants.map((tenant, index) => {
+              return (
+                <RealEstateCard
+                  key={index}
+                  estateData={{
+                    id: tenant.id,
+                    title: tenant.title,
+                    address: tenant.address,
+                    price: tenant.rent.toString(),
+                    nearest_station: tenant.name_station,
+                    image_url: tenant.images,
+                    description: tenant.description,
+                  }}
+                  index={index + 1}
+                />
+              );
+            })}
+          </SideListArea>
+        )}
+
         <div
           style={{
             width: "100%",
