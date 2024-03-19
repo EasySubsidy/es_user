@@ -8,7 +8,6 @@ import {
 } from "../../data";
 import { RealEstateCard } from "@/app/components/RealEstateCard";
 import GoogleMap from "../GoogleMap/GoogleMap";
-import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { SelectedCard } from "../SelectedCard";
 import { useTenants } from "@/app/context";
 
