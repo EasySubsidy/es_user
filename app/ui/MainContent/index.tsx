@@ -85,7 +85,9 @@ export const MainContent: FC = () => {
                   }}
                   isSelected={selectedCardList.includes(index)}
                   displayIndex={index + 1}
-                  onSelect={() => handleCardClick}
+                  onSelect={() => {
+                    handleCardClick(index);
+                  }}
                 />
               );
             })}
