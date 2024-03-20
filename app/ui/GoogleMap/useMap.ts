@@ -16,7 +16,7 @@ export const useMap = ({ defaultPosition }: Props) => {
   const onLoad = (map: Map) => {
     // const bounds = new window.google.maps.LatLngBounds(defaultPosition);
     // map.fitBounds(bounds);
-    map.setZoom(8);
+    map.setZoom(10);
   };
 
   return { isLoaded, onLoad };

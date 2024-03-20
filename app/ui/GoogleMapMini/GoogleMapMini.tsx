@@ -36,7 +36,7 @@ const GoogleMapMini: FC<Props> = (props) => {
 
   const containerStyle = {
     width: "100%",
-    height: "80vh",
+    height: "auto",
   };
 
   return (

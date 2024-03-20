@@ -11,8 +11,16 @@ import GoogleMap from "../GoogleMap/GoogleMap";
 import { SelectedCard } from "../SelectedCard";
 import { useTenants } from "../../context/tenantContext";
 import { RealEstateCard } from "../../components/RealEstateCard";
+import { sortByArea, sortByRent } from "@/app/utils/sort";
+import { OrderType } from "@/app/(pages)/home/page";
+import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 
-export const MainContent: FC = () => {
+type PropsType = {
+  orderType: OrderType;
+};
+
+export const MainContent: FC<PropsType> = (props) => {
+  const { orderType } = props;
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
 
   const handleCardClick = (index: number) => {
@@ -28,12 +36,26 @@ export const MainContent: FC = () => {
   // const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
   const { tenants, tenantsLoading } = useTenants();
 
+  useEffect(() => {
+    switch (orderType) {
+      case "rent":
+        sortByRent(tenants);
+        break;
+      case "area":
+        sortByArea(tenants);
+        break;
+      default:
+        break;
+    }
+    setSelectedCardList([]);
+  }, [tenants, orderType]);
+
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
-        backgroundColor: "#E4E4E4",
+        backgroundColor: "#FFF",
         display: "flex",
         flexDirection: "row",
         alignItems: "flex-start",
@@ -94,7 +116,6 @@ export const MainContent: FC = () => {
           </SideListArea>
         )}
 
-        {/* >>>>>>> firebase_auth */}
         <div
           style={{
             width: "100%",
@@ -109,12 +130,43 @@ export const MainContent: FC = () => {
           }}
         >
           <GoogleMap
-            title="GoogleMap"
-            defaultPosition={{
-              lat: 35.6600893,
-              lng: 139.6952692,
+            center={{
+              lat: 33.867536,
+              lng: 130.856376,
             }}
+            tenantsList={tenants.map((tenant) => {
+              return {
+                title: tenant.title,
+                defaultPosition: {
+                  lat: tenant.latitude,
+                  lng: tenant.longitude,
+                },
+                nearestStationPosition: {
+                  lat: tenant.latitude_station,
+                  lng: tenant.longitude_station,
+                },
+              };
+            })}
           />
+          {/* <GoogleMapMini
+            zoom={15}
+            defaultInfo={{
+              title: "GoogleMapMini",
+              address: "東京都新宿区西新宿",
+              defaultPosition: {
+                lat: 35.6600893,
+                lng: 139.6952692,
+              },
+            }}
+            nearestStationInfo={{
+              title: "GoogleMapMini",
+              address: "東京都新宿区西新宿",
+              nearestStationPosition: {
+                lat: 35.6600893,
+                lng: 139.6952692,
+              },
+            }}
+          /> */}
           {/* <SelectedCard
             detailEstateData={detailDataList[selectedCardList]}
             index={selectedCardList + 1}
