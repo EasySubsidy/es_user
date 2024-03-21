@@ -14,13 +14,15 @@ import { RealEstateCard } from "../../components/RealEstateCard";
 import { sortByArea, sortByRent } from "@/app/utils/sort";
 import { OrderType } from "@/app/(pages)/home/page";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
+import { City } from "@/app/api/getCity";
 
 type PropsType = {
   orderType: OrderType;
+  selectedCity: City | null;
 };
 
 export const MainContent: FC<PropsType> = (props) => {
-  const { orderType } = props;
+  const { orderType, selectedCity } = props;
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
 
   const handleCardClick = (index: number) => {
@@ -35,6 +37,13 @@ export const MainContent: FC<PropsType> = (props) => {
 
   // const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
   const { tenants, tenantsLoading } = useTenants();
+
+  const filteredTenants = tenants.filter((tenant) => {
+    if (selectedCity === null) {
+      return true;
+    }
+    return tenant.city_id === selectedCity.id;
+  });
 
   useEffect(() => {
     switch (orderType) {
@@ -79,11 +88,11 @@ export const MainContent: FC<PropsType> = (props) => {
       >
         {tenantsLoading ? (
           <p>Loading...</p>
-        ) : tenants.length === 0 ? (
+        ) : filteredTenants.length === 0 ? (
           <p>No tenants</p>
         ) : (
           <SideListArea>
-            {tenants.map((tenant, index) => {
+            {filteredTenants.map((tenant, index) => {
               return (
                 <RealEstateCard
                   key={index}

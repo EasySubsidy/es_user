@@ -1,6 +1,10 @@
 "use client";
 
-import { TenantsProvider } from "@/app/context";
+import { City } from "@/app/api/getCity";
+import { PrefecturesProvider, TenantsProvider } from "@/app/context";
+import { CitiesProvider } from "@/app/context/cityContext";
+import { prefectureEntity } from "@/app/entity/prefectureEntity";
+
 import Home from "@/app/page";
 import { MainContent } from "@/app/ui/MainContent";
 import { TagBar } from "@/app/ui/TagBar.tsx";
@@ -13,14 +17,38 @@ const HomePage = () => {
   const handleOrderType = (type: OrderType) => {
     setOrderType(type);
   };
+  const [selectedPrefecture, setSelectedPrefecture] =
+    useState<prefectureEntity>(prefectureEntity.TOKYO);
+  // const [selectedCities, setSelectedCities] = useState<City[]>([]);
+  const handleSelectedPrefecture = (prefecture: prefectureEntity) => {
+    setSelectedPrefecture(prefecture);
+  };
+
+  const [city, setCity] = useState<City | null>(null);
+  const handleCity = (city: City | null) => {
+    setCity(city);
+  };
+
+  // const handleSelectedCities = (cities: City[]) => {
+  //   setSelectedCities(cities);
+  // }
   return (
     <Home>
-      <TenantsProvider>
-        <TagBar orderType={orderType} setOrderType={handleOrderType} />
+      <PrefecturesProvider>
+        <CitiesProvider>
+          <TenantsProvider>
+            <TagBar
+              orderType={orderType}
+              setOrderType={handleOrderType}
+              // selectedPrefecture={selectedPrefecture}
+              setSelectedCity={handleCity}
+            />
 
-        {/* <Banner /> */}
-        <MainContent orderType={orderType} />
-      </TenantsProvider>
+            {/* <Banner /> */}
+            <MainContent orderType={orderType} selectedCity={city} />
+          </TenantsProvider>
+        </CitiesProvider>
+      </PrefecturesProvider>
     </Home>
   );
 };
