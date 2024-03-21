@@ -15,11 +15,11 @@ export const TopicLeading: FC<PropsType> = (props) => {
     <div
       className=""
       style={{
-        width: props.width ? props.width : "60px",
-        height: props.height ? props.height : "24px",
+        width: props.width ? props.width : "120px",
+        height: props.height ? props.height : "auto",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "center",
         borderRadius: "24px",
         backgroundColor: props.backgroundColor ? props.backgroundColor : "#FFF",
