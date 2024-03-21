@@ -3,6 +3,7 @@
 import { Header } from "./ui/Header";
 import { AuthProvider } from "@/app/context";
 import { ReactNode } from "react";
+import { Footer } from "./ui/footer";
 
 const Home = ({ children }: { children: ReactNode }) => {
   return (
@@ -19,6 +20,7 @@ const Home = ({ children }: { children: ReactNode }) => {
           <Banner />
           <MainContent /> */}
         {children}
+        <Footer />
       </main>
     </AuthProvider>
   );

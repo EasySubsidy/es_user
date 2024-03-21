@@ -9,6 +9,9 @@ import "./styles.css";
 import "./styles.css";
 import React from "react";
 import { Tenant } from "../../api/searchTenant";
+import SwiperArea from "../SwiperArea";
+import { SwiperSlide } from "swiper/react";
+import GoogleMapMini from "@/app/ui/GoogleMapMini/GoogleMapMini";
 
 type PropsType = {
   estateData: Tenant;
@@ -262,7 +265,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
           className="modalSpace"
           style={{
             width: "100%",
-            height: 200,
+            height: "auto",
             backgroundColor: "#FFF",
             display: "flex",
             flexDirection: "column",
@@ -283,15 +286,49 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               height: "auto",
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
+              alignItems: "center",
               justifyContent: "center",
               gap: "8px",
               padding: "16px",
             }}
           >
-            内訳の内容を書きたい。
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <SwiperArea
+              // onCardClick={() => {}}
+              >
+                {/* <SwiperSlide key={0}>
+                <div>aaa</div>
+              </SwiperSlide>
+              <SwiperSlide key={1}>
+                <div>aaa</div>
+              </SwiperSlide>
+              <SwiperSlide key={2}>
+                <div>aaa</div>
+              </SwiperSlide> */}
+                {estateData.images.map((img, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <div style={{ width: "100px", height: "100px" }}>
+                        <Image
+                          src={img}
+                          alt="estateImage"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
+              </SwiperArea>
+            </div>
+            {/* </div> */}
+            {/* 内訳の内容を書きたい。 */}
           </div>
-          <div
+          {/* <div
             className="descriptions"
             style={{
               width: "100%",
@@ -305,22 +342,22 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               padding: "16px",
             }}
           >
-            {/* {estateData.description.map((text: string, index: number) => {
-              return (
-                <p
-                  key={index}
-                  style={{
-                    fontSize: 14,
-                    // fontWeight: 700,
-                    color: "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  {text}
-                </p>
-              );
-            })} */}
-          </div>
+            {Array.isArray(estateData.description) &&
+              estateData.description.map((text: string, index: number) => {
+                return (
+                  <p
+                    key={index}
+                    style={{
+                      fontSize: 14,
+                      color: "#000",
+                      textAlign: "center",
+                    }}
+                  >
+                    {text}
+                  </p>
+                );
+              })}
+          </div> */}
         </div>
       )}
     </div>

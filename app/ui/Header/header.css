@@ -5,7 +5,7 @@
 }
 
 .header-button:hover {
-  background-color: #619191; /* ホバー時の背景色 */
-  color: #374151; /* ホバー時のテキスト色 */
-  transform: scale(1.1); /* ホバー時に要素を10%拡大 */
+  /* background-color: #619191; ホバー時の背景色 */
+  /* color: #374151; ホバー時のテキスト色 */
+  transform: scale(1.05); /* ホバー時に要素を10%拡大 */
 }

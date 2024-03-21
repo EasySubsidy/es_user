@@ -20,7 +20,7 @@ export default function SwiperArea(props: SwiperAreaProps) {
   return (
     <div
       style={{
-        width: "100%",
+        width: "480px",
         height: "400px",
       }}
     >
@@ -28,23 +28,8 @@ export default function SwiperArea(props: SwiperAreaProps) {
       {/* その他はimageとtext */}
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {children}
-        {/* <SwiperSlide>
-          <p
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              color: "#000",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            Slide 1
-          </p>
-          Slide 1
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
+
+        {/* <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
         <SwiperSlide>Slide 5</SwiperSlide>

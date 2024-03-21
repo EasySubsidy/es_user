@@ -10,7 +10,7 @@ interface Tenant {
   title: string;
   images: [string];
   area: number;
-  description: string;
+  description: [string];
   rent: number;
   address: string;
   latitude: number;
