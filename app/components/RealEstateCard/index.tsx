@@ -1,17 +1,13 @@
 import Image from "next/image";
-// <<<<<<< HEAD
-// import { EstateCardType, EstateDatum, detailDataType } from "../../data";
+
 import { TopicLeading } from "./parts/topicLeadingIcon";
 import { FC } from "react";
-
-import "./styles.css";
 
 import "./styles.css";
 import React from "react";
 import { Tenant } from "../../api/searchTenant";
 import SwiperArea from "../SwiperArea";
 import { SwiperSlide } from "swiper/react";
-import GoogleMapMini from "@/app/ui/GoogleMapMini/GoogleMapMini";
 
 type PropsType = {
   estateData: Tenant;
@@ -34,11 +30,16 @@ export const RealEstateCard: FC<PropsType> = (props) => {
         gap: 0,
         padding: 0,
         margin: 0,
+        width: "100%",
+        minWidth: "650px",
       }}
     >
       <div
         // className="flex flex-col items-center justify-center w-[300px] h-[400px] bg-[#ECECEC]"
         className="CardContainer"
+        style={{
+          width: "100%",
+        }}
       >
         <div
           className="topArea"
@@ -57,7 +58,8 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             className="imageContainer"
             style={{
               width: "100%",
-              minWidth: "200px",
+              maxWidth: "300px",
+              // minWidth: "200px",
               height: "100%",
               // height: "100%",
               // minWidth: "160px",
@@ -68,6 +70,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               alignItems: "center",
               justifyContent: "center",
               // justifyContent: "center",
+              padding: "16px",
             }}
           >
             <Image
@@ -78,7 +81,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               style={{
                 backgroundColor: "transparent",
                 width: "100%",
-                height: "auto",
+                height: "100%",
               }}
             />
           </div>
@@ -296,30 +299,33 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              <SwiperArea
-              // onCardClick={() => {}}
-              >
-                {/* <SwiperSlide key={0}>
-                <div>aaa</div>
-              </SwiperSlide>
-              <SwiperSlide key={1}>
-                <div>aaa</div>
-              </SwiperSlide>
-              <SwiperSlide key={2}>
-                <div>aaa</div>
-              </SwiperSlide> */}
+              <SwiperArea>
                 {estateData.images.map((img, index) => {
                   return (
                     <SwiperSlide key={index}>
-                      <div style={{ width: "100px", height: "100px" }}>
-                        <Image
-                          src={img}
-                          alt="estateImage"
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
+                      {/* <div style={{ width: "100px", height: "100px" }}> */}
+                      <Image
+                        src={img}
+                        alt="estateImage"
+                        width={200}
+                        height={200}
+                        // layout="fill"
+                        // objectFit="cover"
+                        style={{
+                          width: "200px",
+                          height: "200px",
+                        }}
+                      />
+                      {/* </div> */}
                     </SwiperSlide>
                   );
                 })}
@@ -328,7 +334,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             {/* </div> */}
             {/* 内訳の内容を書きたい。 */}
           </div>
-          {/* <div
+          <div
             className="descriptions"
             style={{
               width: "100%",
@@ -357,7 +363,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   </p>
                 );
               })}
-          </div> */}
+          </div>
         </div>
       )}
     </div>

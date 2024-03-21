@@ -22,6 +22,7 @@ export const SideListArea: FC<SideListAreaProps> = (props) => {
         maxHeight: "calc(100vh - 200px)",
         boxSizing: "border-box",
         width: "100%",
+        minWidth: "700px",
       }}
     >
       {children}

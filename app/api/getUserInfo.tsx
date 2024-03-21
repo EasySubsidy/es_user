@@ -14,6 +14,7 @@ const getUserFavorites = async (uid: string): Promise<string[]> => {
 
     if (userDocSnapshot.exists()) {
       const userData = userDocSnapshot.data() as UserData;
+      console.log("User data found: ", userData);
       return userData.favorites;
     } else {
       console.log("No user data found for the specified uid.");

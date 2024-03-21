@@ -21,22 +21,18 @@ export default function SwiperArea(props: SwiperAreaProps) {
     <div
       style={{
         width: "480px",
-        height: "400px",
+        height: "auto",
       }}
     >
       {/* 最初の要素はgoogle mapのみ */}
       {/* その他はimageとtext */}
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+      <Swiper
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper"
+        slidesPerView={2}
+      >
         {children}
-
-        {/* <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide> */}
       </Swiper>
     </div>
   );

@@ -4,6 +4,7 @@ import "./header.css";
 import { useAuth } from "@/app/context";
 import { useToast } from "@chakra-ui/react";
 import { paths } from "@/app/consts/paths";
+import { getUserFavorites } from "@/app/api/getUserInfo";
 
 export const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -54,6 +55,7 @@ export const Header = () => {
           </p>
         </div>
       </div>
+
       <div
         className="flex flex-row items-center gap-8 mr-[32px]
       "
