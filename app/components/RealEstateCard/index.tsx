@@ -1,18 +1,13 @@
 import Image from "next/image";
-// <<<<<<< HEAD
-// import { EstateCardType, EstateDatum, detailDataType } from "../../data";
+
 import { TopicLeading } from "./parts/topicLeadingIcon";
 import { FC } from "react";
-
-import "./styles.css";
 
 import "./styles.css";
 import React from "react";
 import { Tenant } from "../../api/searchTenant";
 import SwiperArea from "../SwiperArea";
 import { SwiperSlide } from "swiper/react";
-import GoogleMapMini from "@/app/ui/GoogleMapMini/GoogleMapMini";
-import { withDefaultColorScheme } from "@chakra-ui/react";
 
 type PropsType = {
   estateData: Tenant;
