@@ -1,16 +1,11 @@
 "use client";
 
-import Home from "@/app/page";
 import { LoginForm } from "@/app/(pages)/login/LoginForm";
 
-export const Page = () => {
+export default function LoginPage() {
   return (
-    <Home>
-      <div className="h-full flex flex-grow justify-center items-center">
-        <LoginForm />
-      </div>
-    </Home>
+    <div className="h-full flex flex-grow justify-center items-center">
+      <LoginForm />
+    </div>
   );
-};
-
-export default Page;
+}

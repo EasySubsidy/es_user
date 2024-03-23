@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ReactNode,
   createContext,
@@ -42,6 +44,8 @@ export const SubsidiesProvider = ({ children }: { children: ReactNode }) => {
   const value = { subsidies, subsidiesLoading };
 
   return (
-    <SubsidiesContext.Provider value={value}>{children}</SubsidiesContext.Provider>
+    <SubsidiesContext.Provider value={value}>
+      {children}
+    </SubsidiesContext.Provider>
   );
 };
