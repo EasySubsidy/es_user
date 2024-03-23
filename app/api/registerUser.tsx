@@ -1,7 +1,7 @@
 import { AppUser } from "../entity";
 import { Collection } from "../entity";
 import { PostDoc } from "./postDoc";
-import { SignupFormData } from "../(pages)/signup/signupForm";
+import { SignupFormData } from "../pages/signup/signupForm";
 
 export const registerUser = async (uid: string, data: SignupFormData) => {
   try {

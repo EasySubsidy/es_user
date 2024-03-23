@@ -1,4 +1,4 @@
-import { OrderType } from "@/app/(pages)/home/page";
+import { OrderType } from "@/app/pages/home/page";
 // import { Grid, Modal } from "@mui/material";
 import Image from "next/image";
 import React, { FC, use, useState } from "react";

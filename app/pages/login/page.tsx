@@ -1,7 +1,7 @@
 "use client";
 
 import Home from "@/app/page";
-import { LoginForm } from "@/app/(pages)/login/LoginForm";
+import { LoginForm } from "@/app/pages/login/LoginForm";
 
 export const Page = () => {
   return (
