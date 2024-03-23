@@ -4,7 +4,6 @@ import "./header.css";
 import { useAuth } from "@/app/context";
 import { useToast } from "@chakra-ui/react";
 import { paths } from "@/app/consts/paths";
-import { getUserFavorites } from "@/app/api/getUserInfo";
 
 export const Header = () => {
   const { currentUser, logout } = useAuth();

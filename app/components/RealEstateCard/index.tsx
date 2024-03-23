@@ -8,6 +8,7 @@ import React from "react";
 import { Tenant } from "../../api/searchTenant";
 import SwiperArea from "../SwiperArea";
 import { SwiperSlide } from "swiper/react";
+import { UserData } from "@/app/api/getUserInfo";
 
 type PropsType = {
   estateData: Tenant;
@@ -26,6 +27,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
     onSelect,
     isFavorite,
     onChangeFavorite,
+    // fetchUsers,
   } = props;
 
   return (
@@ -161,9 +163,10 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               <button
                 onClick={() => {
                   onChangeFavorite(estateData);
+
+                  // fetchTenants();
                   console.log("clicked");
                   console.log("estateData", estateData);
-                  // updateUserFavorites(uid, favorites);
                 }}
                 style={{
                   width: 24,

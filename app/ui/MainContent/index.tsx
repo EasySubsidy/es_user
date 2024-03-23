@@ -22,47 +22,62 @@ import { useAuth } from "@/app/context";
 type PropsType = {
   orderType: OrderType;
   selectedCity: City | null;
-  // selectedTenants: Tenant[];
-  // setSelectedTenants: (tenants: Tenant[]) => void;
 };
 
 export const MainContent: FC<PropsType> = (props) => {
   const { orderType, selectedCity } = props;
+  const { currentUser, getFavorites, favorites } = useAuth();
+  const { tenants, tenantsLoading, fetchTenants } = useTenants();
+
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
 
-  const [favoriteTenants, setFavoriteTenants] = useState<Tenant[]>([]);
+  const [favoriteTenants, setFavoriteTenants] = useState<string[]>([]);
 
-  const { currentUser, logout } = useAuth();
+  // user情報にfavoritesは存在する。
+  // 更新時にはuser情報が更新される。
+  // ボタンを押した段階で更新が行われほしい。
+  // userdataが更新されたらfavoriteの情報を取得したい。
+
+  // if (currentUser) {
+  // useEffect(() => {
+  // getUserFavorites(currentUser.uid).then((favorites) => {
+  //   setFavoriteTenants(favorites);
+  // });
+  // }, [currentUser]);
+  // }
 
   const handleCardClick = (index: number) => {
     // 選択中の場合は選択解除
     if (selectedCardList.includes(index)) {
       setSelectedCardList(selectedCardList.filter((i) => i !== index));
-      return;
+      // console.log("remove");
     } else {
       setSelectedCardList([...selectedCardList, index]);
+      // console.log("add");
     }
   };
 
-  const handleFavorite = (tenant: Tenant) => {
+  const handleFavorite = async (tenant: Tenant) => {
     if (!currentUser) {
       return;
     }
+    console.log("handleFavorite");
     const tenantsToUpdate = [...favoriteTenants];
-    if (favoriteTenants.includes(tenant)) {
-      tenantsToUpdate.filter((t) => t !== tenant);
+    console.log("tenantsToUpdate", tenantsToUpdate);
+    if (favoriteTenants.includes(tenant.id)) {
+      tenantsToUpdate.filter((t) => t !== tenant.id);
       console.log("remove favorite");
     } else {
-      tenantsToUpdate.push(tenant);
+      tenantsToUpdate.push(tenant.id);
+      console.log("last tenantsToUpdate", tenantsToUpdate[-1]);
       console.log("add favorite");
     }
-    updateUserFavorites(
+    await updateUserFavorites(
       currentUser.uid,
-      tenantsToUpdate.map((t) => t.id)
+      tenantsToUpdate.map((t) => t)
     );
+    getFavorites(currentUser.uid);
   };
-
-  const { tenants, tenantsLoading } = useTenants();
 
   const filteredTenants = tenants.filter((tenant) => {
     if (selectedCity === null) {
@@ -146,12 +161,18 @@ export const MainContent: FC<PropsType> = (props) => {
                     handleCardClick(index);
                   }}
                   isFavorite={
-                    favoriteTenants.length > 0 &&
-                    favoriteTenants.includes(tenant)
+                    currentUser ? favorites.includes(tenant.id) : false
                   }
                   onChangeFavorite={() => {
                     handleFavorite(tenant);
                   }}
+                  // fetchUsers={() => {
+                  //   if (currentUser) {
+                  //     getUser(currentUser.uid);
+                  //   } else {
+                  //     console.log("no user");
+                  //   }
+                  // }}
                 />
               );
             })}
