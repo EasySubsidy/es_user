@@ -5,12 +5,17 @@ import { SignupFormData } from "../(pages)/signup/signupForm";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/app/firebase";
 
+type UserType = {
+  email: string;
+  favorites: string[];
+};
+
 export const updateUserFavorites = async (
   uid: string,
   favorites: string[]
 ): Promise<boolean> => {
   try {
-    const updatedUser: Partial<AppUser> = {
+    const updatedUser: Partial<UserType> = {
       favorites: favorites,
     };
 
