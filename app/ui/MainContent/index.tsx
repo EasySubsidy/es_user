@@ -12,7 +12,7 @@ import { SelectedCard } from "../SelectedCard";
 import { useTenants } from "../../context/tenantContext";
 import { RealEstateCard } from "../../components/RealEstateCard";
 import { sortByArea, sortByRent } from "@/app/utils/sort";
-import { OrderType } from "@/app/(pages)/home/page";
+import { OrderType } from "@/app/pages/home/page";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { City } from "@/app/api/getCity";
 

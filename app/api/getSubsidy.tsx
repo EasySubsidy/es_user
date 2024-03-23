@@ -54,7 +54,7 @@ const getAllSubsidies = async (): Promise<Subsidy[]> => {
         subsidy_rent_title: doc.data().subsidy?.rent?.title || '',
         subsidy_rent_time: doc.data().subsidy?.rent?.time || 0, // タイプミスを修正しました
     }));           
-      
+   
     console.log("subsidies: ", subsidys);
     return subsidys;
   } catch (error) {
