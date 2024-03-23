@@ -14,10 +14,19 @@ type PropsType = {
   isSelected: boolean;
   displayIndex: number;
   onSelect: () => void;
+  isFavorite: boolean;
+  onChangeFavorite: (tenant: Tenant) => void;
 };
 
 export const RealEstateCard: FC<PropsType> = (props) => {
-  const { estateData, isSelected, displayIndex: index, onSelect } = props;
+  const {
+    estateData,
+    isSelected,
+    displayIndex: index,
+    onSelect,
+    isFavorite,
+    onChangeFavorite,
+  } = props;
 
   return (
     <div
@@ -149,6 +158,32 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               >
                 {estateData.title}
               </p>
+              <button
+                onClick={() => {
+                  onChangeFavorite(estateData);
+                  console.log("clicked");
+                  console.log("estateData", estateData);
+                  // updateUserFavorites(uid, favorites);
+                }}
+                style={{
+                  width: 24,
+                  height: 24,
+                  // backgroundColor: "transparent",
+                  // display: "flex",
+                  // flexDirection: "column",
+                  // alignItems: "center",
+                  // justifyContent: "center",
+                  // border: "none",
+                }}
+              >
+                <Image
+                  // src="/star_outline.svg"
+                  src={isFavorite ? "/star_black.svg" : "/star_outline.svg"}
+                  alt="favorite"
+                  width={20}
+                  height={20}
+                />
+              </button>
             </div>
             <div
               className="topicArea"

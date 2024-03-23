@@ -15,15 +15,24 @@ import { sortByArea, sortByRent } from "@/app/utils/sort";
 import { OrderType } from "@/app/(pages)/home/page";
 import GoogleMapMini from "../GoogleMapMini/GoogleMapMini";
 import { City } from "@/app/api/getCity";
+import { Tenant } from "@/app/api/searchTenant";
+import { updateUserFavorites } from "@/app/api/updateUser";
+import { useAuth } from "@/app/context";
 
 type PropsType = {
   orderType: OrderType;
   selectedCity: City | null;
+  // selectedTenants: Tenant[];
+  // setSelectedTenants: (tenants: Tenant[]) => void;
 };
 
 export const MainContent: FC<PropsType> = (props) => {
   const { orderType, selectedCity } = props;
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
+
+  const [favoriteTenants, setFavoriteTenants] = useState<Tenant[]>([]);
+
+  const { currentUser, logout } = useAuth();
 
   const handleCardClick = (index: number) => {
     // 選択中の場合は選択解除
@@ -35,7 +44,24 @@ export const MainContent: FC<PropsType> = (props) => {
     }
   };
 
-  // const [selectedCardNumber, setSelectedCardNumber] = useState<number>(0);
+  const handleFavorite = (tenant: Tenant) => {
+    if (!currentUser) {
+      return;
+    }
+    const tenantsToUpdate = [...favoriteTenants];
+    if (favoriteTenants.includes(tenant)) {
+      tenantsToUpdate.filter((t) => t !== tenant);
+      console.log("remove favorite");
+    } else {
+      tenantsToUpdate.push(tenant);
+      console.log("add favorite");
+    }
+    updateUserFavorites(
+      currentUser.uid,
+      tenantsToUpdate.map((t) => t.id)
+    );
+  };
+
   const { tenants, tenantsLoading } = useTenants();
 
   const filteredTenants = tenants.filter((tenant) => {
@@ -118,6 +144,13 @@ export const MainContent: FC<PropsType> = (props) => {
                   displayIndex={index + 1}
                   onSelect={() => {
                     handleCardClick(index);
+                  }}
+                  isFavorite={
+                    favoriteTenants.length > 0 &&
+                    favoriteTenants.includes(tenant)
+                  }
+                  onChangeFavorite={() => {
+                    handleFavorite(tenant);
                   }}
                 />
               );

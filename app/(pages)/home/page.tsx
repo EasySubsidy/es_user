@@ -1,6 +1,7 @@
 "use client";
 
 import { City } from "@/app/api/getCity";
+import { Tenant } from "@/app/api/searchTenant";
 import { PrefecturesProvider, TenantsProvider } from "@/app/context";
 import { CitiesProvider } from "@/app/context/cityContext";
 import { prefectureEntity } from "@/app/entity/prefectureEntity";
@@ -29,6 +30,8 @@ const HomePage = () => {
     setCity(city);
   };
 
+  // const [favoriteTenants, setFavoriteTenants] = useState<Tenant[]>([]);
+
   // const handleSelectedCities = (cities: City[]) => {
   //   setSelectedCities(cities);
   // }
@@ -45,7 +48,12 @@ const HomePage = () => {
             />
 
             {/* <Banner /> */}
-            <MainContent orderType={orderType} selectedCity={city} />
+            <MainContent
+              orderType={orderType}
+              selectedCity={city}
+              // selectedTenants={favoriteTenants}
+              // setSelectedTenants={setFavoriteTenants}
+            />
           </TenantsProvider>
         </CitiesProvider>
       </PrefecturesProvider>
