@@ -1,4 +1,4 @@
-import { Tenant } from "@/app/api/searchTenant";
+import { Tenant } from "@/app/api/SearchTenant";
 
 export const sortByRent = (tenants: Tenant[]): Tenant[] => {
   // tenantsのrentを昇順に並び替える
