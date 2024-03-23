@@ -11,8 +11,10 @@ interface Subsidy {
   subsidy_employment_fulltime: number;
   subsidy_employment_parttime: number;    
   subsidy_employment_title: string;
-  subsidy_office_limit_large: number;
-  subsidy_office_limit_small: number;
+  subsidy_office_limit_large_amount: number;
+  subsidy_office_limit_large_description: number;
+  subsidy_office_limit_small_amount: number;
+  subsidy_office_limit_small_description: number;
   subsidy_office_rate: number;
   subsidy_office_title: string;
   subsidy_rent_limit_large_amount: number;
@@ -38,8 +40,10 @@ const getAllSubsidies = async (): Promise<Subsidy[]> => {
         subsidy_employment_fulltime: doc.data().subsidy?.employment?.fulltime || 0,
         subsidy_employment_parttime: doc.data().subsidy?.employment?.parttime || 0,
         subsidy_employment_title: doc.data().subsidy?.employment?.title || '',
-        subsidy_office_limit_large: doc.data().subsidy?.office?.limit?.large || 0,
-        subsidy_office_limit_small: doc.data().subsidy?.office?.limit?.small || 0,
+        subsidy_office_limit_large_amount: doc.data().subsidy?.office?.limit?.large?.amount || 0,
+        subsidy_office_limit_small_amount: doc.data().subsidy?.office?.limit?.small?.amount || 0,
+        subsidy_office_limit_large_description: doc.data().subsidy?.office?.limit?.large?.description || '',
+        subsidy_office_limit_small_description: doc.data().subsidy?.office?.limit?.small?.description || '',
         subsidy_office_rate: doc.data().subsidy?.office?.rate || 0,
         subsidy_office_title: doc.data().subsidy?.office?.title || '',
         subsidy_rent_limit_large_amount: doc.data().subsidy?.rent?.limit?.large?.amount || 0,
