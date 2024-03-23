@@ -5,7 +5,7 @@ import {
   useState,
   useContext,
 } from "react";
-import { Tenant, getAllTenants } from "../api/searchTenant";
+import { Tenant, getAllTenants } from "../api/SearchTenant";
 import { Prefecture, getAllPrefectures } from "../api/getPrefecture";
 import { City, getAllCities } from "../api/getCity";
 

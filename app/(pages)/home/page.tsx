@@ -1,7 +1,7 @@
 "use client";
 
 import { City } from "@/app/api/getCity";
-import { PrefecturesProvider, TenantsProvider } from "@/app/context";
+import { PrefecturesProvider, TenantsProvider, SubsidiesProvider } from "@/app/context";
 import { CitiesProvider } from "@/app/context/cityContext";
 import { prefectureEntity } from "@/app/entity/prefectureEntity";
 
@@ -37,15 +37,17 @@ const HomePage = () => {
       <PrefecturesProvider>
         <CitiesProvider>
           <TenantsProvider>
-            <TagBar
-              orderType={orderType}
-              setOrderType={handleOrderType}
-              // selectedPrefecture={selectedPrefecture}
-              setSelectedCity={handleCity}
-            />
+            <SubsidiesProvider>
+              <TagBar
+                orderType={orderType}
+                setOrderType={handleOrderType}
+                // selectedPrefecture={selectedPrefecture}
+                setSelectedCity={handleCity}
+              />
 
-            {/* <Banner /> */}
-            <MainContent orderType={orderType} selectedCity={city} />
+              {/* <Banner /> */}
+              <MainContent orderType={orderType} selectedCity={city} />
+            </SubsidiesProvider>
           </TenantsProvider>
         </CitiesProvider>
       </PrefecturesProvider>
