@@ -9,7 +9,7 @@ export const registerUser = async (uid: string, data: SignupFormData) => {
   try {
     const appUser: AppUser = {
       email: data.email,
-      // favorites: [],
+      favorites: [],
     };
     PostDoc<AppUser>(Collection.USER, uid, appUser);
   } catch (error) {

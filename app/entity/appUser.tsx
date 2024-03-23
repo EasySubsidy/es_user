@@ -1,7 +1,7 @@
 export type AppUser = {
   //   name: string;
   email: string;
-  // favorites: string[];
+  favorites: string[];
 };
 
 export enum Collection {
