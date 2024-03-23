@@ -22,7 +22,7 @@ export type SignupFormData = z.infer<typeof schema>;
 
 export const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, signUp } = useAuth();
+  const { signUp } = useAuth();
 
   const toast = useToast();
   const router = useRouter();
