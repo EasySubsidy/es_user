@@ -46,7 +46,7 @@ export const MainContent: FC<PropsType> = (props) => {
     if (currentUser) {
       getFavorites(currentUser.uid);
     }
-  }, [currentUser, getFavorites]);
+  }, []);
 
   // const [keyword, setKeyword] = useState<string>("");
 
@@ -113,8 +113,12 @@ export const MainContent: FC<PropsType> = (props) => {
     if (keyword === "") {
       return true;
     }
-
     return tenant.title.includes(keyword);
+  });
+
+  // filteredTenantsByCityとfilterTenantByNameの積集合を取る。
+  const filterTenants = filterTenantByName.filter((tenant) => {
+    return filteredTenantsByCity.includes(tenant);
   });
 
   useEffect(() => {
@@ -160,11 +164,11 @@ export const MainContent: FC<PropsType> = (props) => {
       >
         {tenantsLoading ? (
           <p>Loading...</p>
-        ) : filterTenantByName.length === 0 ? (
+        ) : filterTenants.length === 0 ? (
           <p>No tenants</p>
         ) : (
           <SideListArea>
-            {filterTenantByName.map((tenant, index) => {
+            {filterTenants.map((tenant, index) => {
               return (
                 <RealEstateCard
                   key={index}
