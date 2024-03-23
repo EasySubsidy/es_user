@@ -5,7 +5,7 @@ import {
   useState,
   useContext,
 } from "react";
-import { Tenant, getAllTenants } from "../api/searchTenant";
+import { Tenant, getAllTenants } from "../api/SearchTenant";
 
 type TenantContextType = {
   tenants: Tenant[];
