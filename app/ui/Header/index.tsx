@@ -65,7 +65,7 @@ export const Header = () => {
             style={{
               fontSize: 16,
               fontWeight: 700,
-              color: "#000",
+              color: "#fff",
               textAlign: "center",
             }}
           >
@@ -88,7 +88,7 @@ export const Header = () => {
                   style={{
                     fontSize: 16,
                     fontWeight: 700,
-                    // color: "#000000",
+                    color: "#fff",
                     textAlign: "center",
                   }}
                 >
@@ -108,7 +108,7 @@ export const Header = () => {
                 style={{
                   fontSize: 16,
                   fontWeight: 700,
-                  // color: "#000000",
+                  color: "#fff",
                   textAlign: "center",
                 }}
               >
@@ -118,7 +118,7 @@ export const Header = () => {
           </button>
         ) : null}
 
-        <button className="header-button">
+        {/* <button className="header-button">
           <div className="flex flex-col items-center gap-2">
             <Image src="/menu.svg" alt="menu" width={24} height={24} />
             <p
@@ -132,7 +132,7 @@ export const Header = () => {
               メニュー
             </p>
           </div>
-        </button>
+        </button> */}
       </div>
     </div>
   );

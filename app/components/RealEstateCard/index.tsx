@@ -1,14 +1,21 @@
 import Image from "next/image";
 
 import { TopicLeading } from "./parts/topicLeadingIcon";
-import { FC } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 
 import "./styles.css";
 import React from "react";
-import { Tenant } from "@/app/api/SearchTenant";
+import { Tenant } from "@/app/api/searchTenant";
 import SwiperArea from "../SwiperArea";
 import { SwiperSlide } from "swiper/react";
 import { UserData } from "@/app/api/getUserInfo";
+import {
+  SubsidyDetail,
+  UserInputForSubsidy,
+  checkSubsidyRequirement,
+  subsidyDataType,
+} from "@/app/utils/subsidy_function";
+import { User } from "firebase/auth";
 
 type PropsType = {
   estateData: Tenant;
@@ -17,6 +24,9 @@ type PropsType = {
   onSelect: () => void;
   isFavorite: boolean;
   onChangeFavorite: (tenant: Tenant) => void;
+  subSidy: subsidyDataType;
+  userInput: UserInputForSubsidy;
+  currentUser: User | null;
 };
 
 export const RealEstateCard: FC<PropsType> = (props) => {
@@ -27,8 +37,40 @@ export const RealEstateCard: FC<PropsType> = (props) => {
     onSelect,
     isFavorite,
     onChangeFavorite,
-    // fetchUsers,
+    subSidy,
+    userInput,
+    currentUser,
   } = props;
+
+  const TenantForSubsidy = useMemo(() => {
+    return {
+      rent: estateData.rent,
+      area: estateData.area,
+      tenant_subsidy_city_id: estateData.city_id,
+    };
+  }, [estateData]);
+
+  const UserInputForSubsidy = userInput;
+  const subsidyDataType = subSidy;
+
+  const [subsidyDetail, setSubsidyDetail] = useState<SubsidyDetail>({
+    employee_subsidy: 0,
+    office_subsidy: 0,
+    rent_subsidy: 0,
+  });
+
+  useEffect(() => {
+    console.log("TenantForSubsidy", TenantForSubsidy);
+    console.log("UserInputForSubsidy", UserInputForSubsidy);
+    console.log("subsidyDataType", subsidyDataType);
+    const subsidyData = checkSubsidyRequirement(
+      TenantForSubsidy,
+      UserInputForSubsidy,
+      subsidyDataType
+    );
+    setSubsidyDetail(subsidyData);
+    console.log("subsidyData", subsidyData);
+  }, [TenantForSubsidy, UserInputForSubsidy, subsidyDataType]);
 
   return (
     <div
@@ -160,33 +202,35 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               >
                 {estateData.title}
               </p>
-              <button
-                onClick={() => {
-                  onChangeFavorite(estateData);
+              {currentUser && (
+                <button
+                  onClick={() => {
+                    onChangeFavorite(estateData);
 
-                  // fetchTenants();
-                  console.log("clicked");
-                  console.log("estateData", estateData);
-                }}
-                style={{
-                  width: 24,
-                  height: 24,
-                  // backgroundColor: "transparent",
-                  // display: "flex",
-                  // flexDirection: "column",
-                  // alignItems: "center",
-                  // justifyContent: "center",
-                  // border: "none",
-                }}
-              >
-                <Image
-                  // src="/star_outline.svg"
-                  src={isFavorite ? "/star_black.svg" : "/star_outline.svg"}
-                  alt="favorite"
-                  width={20}
-                  height={20}
-                />
-              </button>
+                    // fetchTenants();
+                    console.log("clicked");
+                    console.log("estateData", estateData);
+                  }}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    // backgroundColor: "transparent",
+                    // display: "flex",
+                    // flexDirection: "column",
+                    // alignItems: "center",
+                    // justifyContent: "center",
+                    // border: "none",
+                  }}
+                >
+                  <Image
+                    // src="/star_outline.svg"
+                    src={isFavorite ? "/star_black.svg" : "/star_outline.svg"}
+                    alt="favorite"
+                    width={20}
+                    height={20}
+                  />
+                </button>
+              )}
             </div>
             <div
               className="topicArea"
@@ -207,6 +251,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   alignItems: "center",
                   justifyContent: "flex-start",
                   gap: "8px",
+                  width: "100%",
                 }}
               >
                 <TopicLeading title="家賃" fontSize="16px" />
@@ -215,10 +260,13 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     fontSize: 16,
                     // fontWeight: 700,
                     color: "#000",
-                    textAlign: "center",
+
+                    width: "100%",
+                    maxWidth: "160px",
+                    textAlign: "start",
                   }}
                 >
-                  {estateData.rent}
+                  {estateData.rent}円
                 </p>
               </div>
               <div
@@ -228,6 +276,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   alignItems: "center",
                   justifyContent: "flex-start",
                   gap: "8px",
+                  width: "100%",
                 }}
               >
                 <TopicLeading title="補助金総額" fontSize="16px" />
@@ -236,10 +285,16 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     fontSize: 16,
                     // fontWeight: 700,
                     color: "#000",
-                    textAlign: "center",
+
+                    width: "100%",
+                    maxWidth: "160px",
+                    textAlign: "start",
                   }}
                 >
-                  {estateData.rent}
+                  {subsidyDetail.employee_subsidy +
+                    subsidyDetail.office_subsidy +
+                    subsidyDetail.rent_subsidy}
+                  円
                 </p>
               </div>
               <div
@@ -249,6 +304,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   alignItems: "center",
                   justifyContent: "flex-start",
                   gap: "8px",
+                  width: "100%",
                 }}
               >
                 <TopicLeading title="住所" fontSize="16px" />
@@ -257,7 +313,9 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     fontSize: 14,
                     // fontWeight: 700,
                     color: "#000",
-                    textAlign: "center",
+                    width: "100%",
+                    maxWidth: "160px",
+                    textAlign: "start",
                   }}
                 >
                   {estateData.address}
@@ -270,6 +328,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                   alignItems: "center",
                   justifyContent: "flex-start",
                   gap: "8px",
+                  width: "100%",
                 }}
               >
                 <TopicLeading title="最寄駅" fontSize="16px" />
@@ -278,7 +337,10 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     fontSize: 14,
                     // fontWeight: 700,
                     color: "#000",
-                    textAlign: "center",
+
+                    width: "100%",
+                    maxWidth: "160px",
+                    textAlign: "start",
                   }}
                 >
                   {estateData.name_station}
@@ -389,19 +451,78 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             {Array.isArray(estateData.description) &&
               estateData.description.map((text: string, index: number) => {
                 return (
-                  <p
+                  <div
                     key={index}
                     style={{
-                      fontSize: 14,
-                      color: "#000",
-                      textAlign: "center",
+                      width: "100%",
+                      height: "auto",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      padding: "16px 16px",
                     }}
                   >
-                    {text}
-                  </p>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: "#000",
+                        textAlign: "center",
+                      }}
+                    >
+                      {text}
+                    </p>
+                  </div>
                 );
               })}
           </div>
+        </div>
+      )}
+      {subsidyDetail.employee_subsidy +
+        subsidyDetail.office_subsidy +
+        subsidyDetail.rent_subsidy ===
+      0 ? (
+        <div
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            padding: "16px",
+            color: "#FF7E7E",
+          }}
+        >
+          ご利用になれる補助金がないか「お好み条件」から条件を入力してください。
+        </div>
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            padding: "16px",
+            color: "#000",
+          }}
+        >
+          <p>
+            {subSidy.subsidyDataType.employment.title}{" "}
+            {subsidyDetail.employee_subsidy}
+          </p>
+          <p>
+            {subSidy.subsidyDataType.office.title}{" "}
+            {subsidyDetail.office_subsidy}
+          </p>
+          <p>
+            {subSidy.subsidyDataType.rent.title} {subsidyDetail.rent_subsidy}
+          </p>
         </div>
       )}
     </div>
