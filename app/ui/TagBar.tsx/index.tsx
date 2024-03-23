@@ -24,8 +24,8 @@ export const TagBar: FC<TagBarProps> = (props) => {
     setOpen(!open);
   };
 
-  const { prefectures, prefecturesLoading } = usePrefectures();
-  const { cities, citiesLoading } = useCities();
+  const { prefectures } = usePrefectures();
+  const { cities } = useCities();
 
   // prefecturesのprefecture_nameを受け取ってcitiesのprefecture_idと比較して
   // prefecture_idが一致するものをcitiesの中から抽出する。

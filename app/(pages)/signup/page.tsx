@@ -1,16 +1,11 @@
 "use client";
 
-import Home from "@/app/page";
 import { SignUpForm } from "./signupForm";
 
-export const Page = () => {
+export default function SignupPage() {
   return (
-    <Home>
-      <div className="h-full flex flex-grow justify-center items-center">
-        <SignUpForm />
-      </div>
-    </Home>
+    <div className="h-full flex flex-grow justify-center items-center">
+      <SignUpForm />
+    </div>
   );
-};
-
-export default Page;
+}

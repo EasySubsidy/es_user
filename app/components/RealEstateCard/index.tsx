@@ -5,7 +5,7 @@ import { FC } from "react";
 
 import "./styles.css";
 import React from "react";
-import { Tenant } from "../../api/searchTenant";
+import { Tenant } from "@/app/api/SearchTenant";
 import SwiperArea from "../SwiperArea";
 import { SwiperSlide } from "swiper/react";
 import { UserData } from "@/app/api/getUserInfo";
