@@ -27,7 +27,6 @@ export const TenantsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchTenants = async () => {
-      setLoading(true);
       try {
         const fetchedTenants = await getAllTenants();
         setTenants(fetchedTenants);

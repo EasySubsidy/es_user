@@ -22,8 +22,6 @@ import { paths } from "../consts/paths";
 
 type AuthContextType = {
   currentUser: User | null;
-  authloading: boolean;
-  setAuthLoading: (loading: boolean) => void;
   login: (email: string, password: string) => Promise<UserCredential>;
   logout: () => Promise<void>;
   signUp: (email: string, password: string) => Promise<UserCredential>;
@@ -35,13 +33,13 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [authloading, setAuthLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setAuthLoading(false);
+      if (currentUser !== user) {
+        setCurrentUser(user);
+      }
     });
 
     return unsubscribe;
@@ -49,24 +47,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const value = {
     currentUser,
-    authloading,
-    setAuthLoading,
     login: (email: string, password: string) => {
-      setAuthLoading(true);
       return signInWithEmailAndPassword(auth, email, password);
     },
     logout: async () => {
-      setAuthLoading(true);
       await signOut(auth)
         .then(() => {
           router.push(paths.home);
+          setCurrentUser(null);
         })
         .catch((error) => {
           console.error(error);
         });
     },
     signUp: async (email: string, password: string) => {
-      setAuthLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,

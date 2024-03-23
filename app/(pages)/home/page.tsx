@@ -9,7 +9,6 @@ import {
 import { CitiesProvider } from "@/app/context/cityContext";
 import { prefectureEntity } from "@/app/entity/prefectureEntity";
 
-import Home from "@/app/page";
 import { MainContent } from "@/app/ui/MainContent";
 import { TagBar } from "@/app/ui/TagBar.tsx";
 import { useState } from "react";
