@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ReactNode,
   createContext,
@@ -5,7 +7,6 @@ import {
   useState,
   useContext,
 } from "react";
-import { Tenant, getAllTenants } from "../api/searchTenant";
 import { Prefecture, getAllPrefectures } from "../api/getPrefecture";
 import { City } from "../api/getCity";
 
