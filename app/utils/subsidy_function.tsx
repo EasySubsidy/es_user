@@ -9,23 +9,31 @@ export const checkSubsidyRequirement = (
     rent_subsidy: 0,
   };
   if (
+    // 雇用人数が超えている。
+
     (user.employee_new
       ? user.employee_new > subsidy.requirement.employee_new
       : false) &&
-    tenant.area &&
-    subsidy.requirement.area
-      ? tenant.area > subsidy.requirement.area
-      : false
+    (subsidy.requirement.area ? tenant.area > subsidy.requirement.area : true)
   ) {
-  } else {
+    // } else {
     // 雇用補助の計算
     if (subsidy.subsidyDataType.employment.full_time > 0) {
-      subsidyDetail.employee_subsidy =
+      subsidyDetail.employee_subsidy +=
         subsidy.subsidyDataType.employment.full_time * (user.full_time ?? 0);
+      console.log(
+        "subsidy.subsidyDataType.employment.full_time",
+        subsidy.subsidyDataType.employment.full_time
+      );
+      console.log("user.full_time", user.full_time);
+      console.log(
+        "subsidyDetail.employee_subsidy",
+        subsidyDetail.employee_subsidy
+      );
     }
     if (subsidy.subsidyDataType.employment.part_time > 0) {
-      subsidyDetail.employee_subsidy =
-        subsidy.subsidyDataType.office.large.amount * (user.part_time ?? 0);
+      subsidyDetail.employee_subsidy +=
+        subsidy.subsidyDataType.employment.part_time * (user.part_time ?? 0);
     }
     // 事務所補助の計算
     if (user.renovation && user.renovation > 0) {

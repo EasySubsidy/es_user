@@ -387,6 +387,7 @@ export const TagBar: FC<TagBarProps> = (props) => {
                         isPrefecture={true}
                         setSelected={setSelectedCity}
                         fetchSubsidyData={fetchSubsidyData}
+                        selectedCity={city}
                       />
 
                       {/* <div
@@ -770,6 +771,7 @@ export const TagBar: FC<TagBarProps> = (props) => {
                         office_size: office_size,
                         rent: rent,
                       });
+                      toggleModalOpen();
                     }}
                     style={{
                       width: 300,

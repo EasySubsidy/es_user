@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import { TopicLeading } from "./parts/topicLeadingIcon";
 import { FC, useEffect, useMemo, useState } from "react";
-
 import "./styles.css";
 import React from "react";
 import { Tenant } from "@/app/api/searchTenant";
@@ -98,7 +97,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
           className="topArea"
           style={{
             width: "100%",
-            height: 200,
+            height: "300px",
             backgroundColor: "#FFF",
             display: "flex",
             flexDirection: "row",
@@ -151,7 +150,7 @@ export const RealEstateCard: FC<PropsType> = (props) => {
               alignItems: "flex-start",
               // justifyContent: "center",
               gap: "12px",
-              paddingTop: "16px",
+              // paddingTop: "16px",
             }}
           >
             <div
@@ -257,8 +256,8 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                 <TopicLeading title="家賃" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 16,
-                    // fontWeight: 700,
+                    fontSize: 18,
+                    fontWeight: 700,
                     color: "#000",
 
                     width: "100%",
@@ -266,7 +265,12 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     textAlign: "start",
                   }}
                 >
-                  {estateData.rent}円
+                  {/* {estateData.rent}円 */}
+                  {estateData.rent.toLocaleString("ja-JP", {
+                    style: "currency",
+                    currency: "JPY",
+                  })}
+                  円（月額）
                 </p>
               </div>
               <div
@@ -282,8 +286,8 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                 <TopicLeading title="補助金総額" fontSize="16px" />
                 <p
                   style={{
-                    fontSize: 16,
-                    // fontWeight: 700,
+                    fontSize: 18,
+                    fontWeight: 700,
                     color: "#000",
 
                     width: "100%",
@@ -291,10 +295,15 @@ export const RealEstateCard: FC<PropsType> = (props) => {
                     textAlign: "start",
                   }}
                 >
-                  {subsidyDetail.employee_subsidy +
+                  {(
+                    subsidyDetail.employee_subsidy +
                     subsidyDetail.office_subsidy +
-                    subsidyDetail.rent_subsidy}
-                  円
+                    subsidyDetail.rent_subsidy
+                  ).toLocaleString("ja-JP", {
+                    style: "currency",
+                    currency: "JPY",
+                  })}
+                  円（全期間）
                 </p>
               </div>
               <div
