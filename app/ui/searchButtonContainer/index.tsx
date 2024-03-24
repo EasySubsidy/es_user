@@ -7,12 +7,20 @@ type SearchButtonContainerProps = {
   cities: City[];
   setSelected: (selected: City | null) => Promise<void>;
   fetchSubsidyData: (city_id: string) => Promise<void>;
+  selectedCity: City | null;
 };
 
 export const SearchButtonContainer: FC<SearchButtonContainerProps> = (
   props
 ) => {
-  const { isPrefecture, title, cities, setSelected, fetchSubsidyData } = props;
+  const {
+    isPrefecture,
+    title,
+    cities,
+    setSelected,
+    fetchSubsidyData,
+    selectedCity,
+  } = props;
   return (
     <div
       className="search-button-container"
@@ -64,7 +72,9 @@ export const SearchButtonContainer: FC<SearchButtonContainerProps> = (
               key={index}
               className="header-button"
               style={{
-                backgroundColor: "#FFF",
+                backgroundColor:
+                  selectedCity?.id === city.id ? "#619191" : "#FFF",
+                // backgroundColor: "#FFF",
                 padding: "8px 32px",
                 borderRadius: "16px",
                 border: "1px solid #0fc1da",

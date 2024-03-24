@@ -35,7 +35,7 @@ export const Header = () => {
     <div className="flex flex-row items-center justify-between h-[120px] w-full bg-[#619191]">
       <div className="flex flex-row items-center gap-4 p-16">
         <Image
-          src="/header_logo.svg"
+          src="/icon.jpg"
           alt="logo"
           width={80}
           height={80}
