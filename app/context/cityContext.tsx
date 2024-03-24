@@ -7,7 +7,7 @@ import {
   useState,
   useContext,
 } from "react";
-import { Tenant, getAllTenants } from "../api/SearchTenant";
+import { Tenant, getAllTenants } from "../api/searchTenant";
 import { Prefecture, getAllPrefectures } from "../api/getPrefecture";
 import { City, getAllCities } from "../api/getCity";
 import { set } from "firebase/database";

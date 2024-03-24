@@ -2,12 +2,12 @@ import { Collection } from "../entity";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-interface UserData {
+export interface UserData {
   uid: string;
   favorites: string[];
 }
 
-const getUserFavorites = async (uid: string): Promise<string[]> => {
+const getUserInfo = async (uid: string): Promise<UserData> => {
   try {
     const userDocRef = doc(db, Collection.USER, uid);
     const userDocSnapshot = await getDoc(userDocRef);
@@ -15,10 +15,10 @@ const getUserFavorites = async (uid: string): Promise<string[]> => {
     if (userDocSnapshot.exists()) {
       const userData = userDocSnapshot.data() as UserData;
       console.log("User data found: ", userData);
-      return userData.favorites;
+      return userData;
     } else {
       console.log("No user data found for the specified uid.");
-      return [];
+      return { uid: uid, favorites: [] };
     }
   } catch (error) {
     console.error("Error getting user favorites: ", error);
@@ -26,4 +26,4 @@ const getUserFavorites = async (uid: string): Promise<string[]> => {
   }
 };
 
-export { getUserFavorites };
+export { getUserInfo };

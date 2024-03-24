@@ -5,13 +5,14 @@ type SearchButtonContainerProps = {
   isPrefecture: boolean;
   title: string;
   cities: City[];
-  setSelected: (selected: City | null) => void;
+  setSelected: (selected: City | null) => Promise<void>;
+  fetchSubsidyData: (city_id: string) => Promise<void>;
 };
 
 export const SearchButtonContainer: FC<SearchButtonContainerProps> = (
   props
 ) => {
-  const { isPrefecture, title, cities, setSelected } = props;
+  const { isPrefecture, title, cities, setSelected, fetchSubsidyData } = props;
   return (
     <div
       className="search-button-container"
@@ -69,7 +70,9 @@ export const SearchButtonContainer: FC<SearchButtonContainerProps> = (
                 border: "1px solid #0fc1da",
                 width: "160px",
               }}
-              onClick={() => {
+              onClick={async () => {
+                // setSelected(city);
+                await fetchSubsidyData(city.id);
                 setSelected(city);
               }}
             >

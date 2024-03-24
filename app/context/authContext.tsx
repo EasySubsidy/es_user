@@ -19,12 +19,16 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { paths } from "../consts/paths";
+import { UserData, getUserInfo } from "../api/getUserInfo";
+import { set } from "firebase/database";
 
 type AuthContextType = {
   currentUser: User | null;
   login: (email: string, password: string) => Promise<UserCredential>;
   logout: () => Promise<void>;
   signUp: (email: string, password: string) => Promise<UserCredential>;
+  getFavorites: (uid: string) => Promise<void>;
+  favorites: string[];
 };
 
 const AuthContext = createContext<AuthContextType>(undefined as never);
@@ -44,6 +48,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return unsubscribe;
   }, []);
+
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const value = {
     currentUser,
@@ -70,6 +76,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       return userCredential;
     },
+    getFavorites: async (uid: string) => {
+      const favorites = await getUserInfo(uid);
+      setFavorites(favorites.favorites);
+    },
+    favorites,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
