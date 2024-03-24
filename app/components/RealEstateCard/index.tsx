@@ -521,17 +521,42 @@ export const RealEstateCard: FC<PropsType> = (props) => {
             color: "#000",
           }}
         >
-          <p>
-            {subSidy.subsidyDataType.employment.title}{" "}
-            {subsidyDetail.employee_subsidy}
-          </p>
-          <p>
-            {subSidy.subsidyDataType.office.title}{" "}
-            {subsidyDetail.office_subsidy}
-          </p>
-          <p>
-            {subSidy.subsidyDataType.rent.title} {subsidyDetail.rent_subsidy}
-          </p>
+          {/* {estateData.rent.toLocaleString("ja-JP", {
+                    style: "currency",
+                    currency: "JPY",
+                  })} */}
+          {subsidyDetail.employee_subsidy > 0 && (
+            <p>
+              {subSidy.subsidyDataType.employment.title}{" "}
+              {subsidyDetail.employee_subsidy.toLocaleString("ja-JP", {
+                style: "currency",
+                currency: "JPY",
+              })}
+              円
+            </p>
+          )}
+
+          {subsidyDetail.office_subsidy > 0 && (
+            <p>
+              {subSidy.subsidyDataType.office.title}{" "}
+              {subsidyDetail.office_subsidy.toLocaleString("ja-JP", {
+                style: "currency",
+                currency: "JPY",
+              })}
+              円
+            </p>
+          )}
+
+          {subsidyDetail.rent_subsidy > 0 && (
+            <p>
+              {subSidy.subsidyDataType.rent.title}{" "}
+              {subsidyDetail.rent_subsidy.toLocaleString("ja-JP", {
+                style: "currency",
+                currency: "JPY",
+              })}
+              円
+            </p>
+          )}
         </div>
       )}
     </div>

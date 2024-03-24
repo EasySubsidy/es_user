@@ -88,7 +88,10 @@ export const checkSubsidyRequirement = (
           tenant.rent * subsidy.subsidyDataType.rent.rate
         ) {
           subsidyDetail.rent_subsidy =
-            tenant.rent * subsidy.subsidyDataType.rent.rate;
+            tenant.rent *
+            subsidy.subsidyDataType.rent.rate *
+            subsidy.subsidyDataType.rent.time *
+            12;
         } else if (
           // 支給上限を超えていれば、家賃補助を計算
           subsidy.subsidyDataType.rent.large.amount <
@@ -105,7 +108,10 @@ export const checkSubsidyRequirement = (
           tenant.rent * subsidy.subsidyDataType.rent.rate
         ) {
           subsidyDetail.rent_subsidy =
-            tenant.rent * subsidy.subsidyDataType.rent.rate;
+            tenant.rent *
+            subsidy.subsidyDataType.rent.rate *
+            subsidy.subsidyDataType.rent.time *
+            12;
         } else if (
           // 支給上限を超えていれば、家賃補助を計算
           subsidy.subsidyDataType.rent.small.amount <
